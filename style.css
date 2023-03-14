@@ -3,6 +3,11 @@
   height: 200;
   transform: translate(-50%, -50%);
  }
+ #spaceship {
+   width: 200;
+   height: 200;
+   transform: translate(-50%, -50%);
+ }
  #moon {
   width: 80;
   height: 60;

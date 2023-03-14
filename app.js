@@ -4,8 +4,9 @@ let mars = {
   Vx: 0,
   Vy: 0.2,
   Ma: 100,
-  star: document.querySelector('#mars'),
+  img: document.querySelector('#mars'),
 }
+
 
 let sun = {
   x: 600,
@@ -13,7 +14,7 @@ let sun = {
   Vx: 0,
   Vy: 0,
   Ma: 10000,
-  star: document.querySelector('#sun'),
+  img: document.querySelector('#sun'),
 }
 
 let earth = {
@@ -22,7 +23,7 @@ let earth = {
   Vx: 0, // Speed 
   Vy: -0.2, // Speed
   Ma: 100, //Mass
-  star: document.querySelector('#earth'),
+  img: document.querySelector('#earth'),
 }
 let moon = {
   x: 100,
@@ -30,19 +31,27 @@ let moon = {
   Vx: 0.2, //speed
   Vy: 0, //speed
   Ma: 200, //Mass
-  star: document.querySelector('#moon'),
+  img: document.querySelector('#moon'),
+}
+let ship = {
+  x: 200,
+  y: 200,
+  Vx: 0,
+  Vy: 0,
+  Ma: 20,
+  img: document.querySelector('#spaceship'),
 }
 const G = 0.01;
-let planets = [moon,earth,mars,sun];
+let planets = [moon,earth,mars,sun,ship];
 
 //let distX = earth.x-moon.x;
 //let distY = earth.y-moon.y;
 
-mars.star.style.position = 'absolute';
-moon.star.style.position = 'absolute';
-earth.star.style.position = 'absolute';
-sun.star.style.position = 'absolute';
-
+mars.img.style.position = 'absolute';
+moon.img.style.position = 'absolute';
+earth.img.style.position = 'absolute';
+sun.img.style.position = 'absolute';
+ship.img.style.position = 'absolute';
 setInterval(time, 1000/60);
 
 function time () {
@@ -69,8 +78,10 @@ function time () {
       otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
 
       // make them visualy/realy fly (move imgs)
-      otherPlanet.star.style.top = otherPlanet.y + 'px';
-      otherPlanet.star.style.left = otherPlanet.x + 'px';
+      otherPlanet.img.style.top = otherPlanet.y + 'px';
+      otherPlanet.img.style.left = otherPlanet.x + 'px';
+
+
       }
   }
 }
