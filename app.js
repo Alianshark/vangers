@@ -80,8 +80,10 @@ function time () {
       // make them visualy/realy fly (move imgs)
       otherPlanet.img.style.top = otherPlanet.y + 'px';
       otherPlanet.img.style.left = otherPlanet.x + 'px';
+      
 
-
+      let angle = -Math.atan(otherPlanet.Vx/otherPlanet.Vy);
+      otherPlanet.img.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;
       }
   }
 }
