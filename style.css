@@ -28,3 +28,9 @@
    width: 100%;
    height: 100%;
  }
+ #fps {
+   position: absolute;
+   top: 50;
+   right: 50;
+   color: aliceblue;
+ }

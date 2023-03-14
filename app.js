@@ -1,3 +1,4 @@
+let currentframes = 0;
 let mars = {
   x: 100,
   y: 100,
@@ -38,7 +39,7 @@ let ship = {
   y: 200,
   Vx: 0,
   Vy: 0,
-  Ma: 20,
+  Ma: 200,
   img: document.querySelector('#spaceship'),
 }
 const G = 0.01;
@@ -52,9 +53,32 @@ moon.img.style.position = 'absolute';
 earth.img.style.position = 'absolute';
 sun.img.style.position = 'absolute';
 ship.img.style.position = 'absolute';
+
 setInterval(time, 1000/60);
+setInterval(meagurefps, 1000);
+function meagurefps () {
+ let fpselement = document.querySelector('#fps');
+ fpselement.innerHTML = currentframes;
+ currentframes = 0;
+}
+document.addEventListener('keydown', keyHandler);
+function keyHandler (event) {
+  if (event.key == "w") {
+    ship.Vy -= 0.1;
+  }
+  if (event.key == "s") {
+    ship.Vy += 0.1;
+  }
+  if (event.key == "d") {
+    ship.Vx += 0.1;
+  }
+  if (event.key == "a") {
+    ship.Vx -= 0.1;
+  }
+}
 
 function time () {
+  currentframes = currentframes + 1;
   console.log('Time: ',time);
   for (let planet of planets) {
     console.log('Planet',planet);
