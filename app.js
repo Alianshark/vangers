@@ -61,8 +61,8 @@ function time () {
       console.log('dist: ',dist);
       console.log('Other Planet: ',otherPlanet);
       // calculate the speed of planet (for each personal)
-      otherPlanet.Vx = otherPlanet.Vx + gravityX / otherPlanet.Ma;
-      otherPlanet.Vy = otherPlanet.Vy + gravityY / otherPlanet.Ma;
+      otherPlanet.Vx = otherPlanet.Vx - gravityX / otherPlanet.Ma;
+      otherPlanet.Vy = otherPlanet.Vy - gravityY / otherPlanet.Ma;
       
       // make them fly (coordinates)
       otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
