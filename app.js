@@ -39,7 +39,7 @@ let ship = {
   y: 200,
   Vx: 0,
   Vy: 0,
-  Ma: 200,
+  Ma: 100,
   img: document.querySelector('#spaceship'),
 }
 const G = 0.01;
@@ -63,17 +63,18 @@ function meagurefps () {
 }
 document.addEventListener('keydown', keyHandler);
 function keyHandler (event) {
+  const gas = 0.5;
   if (event.key == "w") {
-    ship.Vy -= 0.1;
+    ship.Vy -= gas;
   }
   if (event.key == "s") {
-    ship.Vy += 0.1;
+    ship.Vy += gas;
   }
   if (event.key == "d") {
-    ship.Vx += 0.1;
+    ship.Vx += gas;
   }
   if (event.key == "a") {
-    ship.Vx -= 0.1;
+    ship.Vx -= gas;
   }
 }
 
