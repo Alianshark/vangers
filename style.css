@@ -13,6 +13,11 @@
     height: 200;
     transform: translate(-50%, -50%);
  }
+ #sun {
+   width: 200;
+   height: 200;
+   transform: translate(-50%, -50%);
+ }
  html, body {
    overflow: hidden;
    width: 100%;

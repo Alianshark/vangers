@@ -2,37 +2,37 @@ let mars = {
   x: 100,
   y: 100,
   Vx: 0,
-  Vy: 0,
+  Vy: 0.2,
   Ma: 100,
   star: document.querySelector('#mars'),
 }
 
 let sun = {
-  x: 800,
+  x: 600,
   y: 300,
   Vx: 0,
   Vy: 0,
-  Ma: 100,
+  Ma: 10000,
   star: document.querySelector('#sun'),
 }
 
 let earth = {
-  x: 768, //earth start position x
-  y: 432, //start position y
+  x: 1000, //earth start position x
+  y: 100, //start position y
   Vx: 0, // Speed 
-  Vy: 0, // Speed
+  Vy: -0.2, // Speed
   Ma: 100, //Mass
   star: document.querySelector('#earth'),
 }
 let moon = {
-  x: 400,
-  y: 400,
-  Vx: 0, //speed
+  x: 100,
+  y: 600,
+  Vx: 0.2, //speed
   Vy: 0, //speed
-  Ma: 100, //Mass
+  Ma: 200, //Mass
   star: document.querySelector('#moon'),
 }
-const G = 0.001;
+const G = 0.01;
 let planets = [moon,earth,mars,sun];
 
 //let distX = earth.x-moon.x;
@@ -56,8 +56,8 @@ function time () {
       let distX = otherPlanet.x - planet.x;
       let distY = otherPlanet.y - planet.y;
       let dist = Math.sqrt(distX * distX + distY * distY);
-      let gravityX = distX * G * otherPlanet.Ma * planet.Ma / (dist * dist);
-      let gravityY = distY * G * otherPlanet.Ma * planet.Ma / (dist * dist);
+      let gravityX = distX * G * otherPlanet.Ma * planet.Ma / (dist * dist * dist);
+      let gravityY = distY * G * otherPlanet.Ma * planet.Ma / (dist * dist * dist);
       console.log('dist: ',dist);
       console.log('Other Planet: ',otherPlanet);
       // calculate the speed of planet (for each personal)
