@@ -1,19 +1,23 @@
  #earth {
+  filter: hue-rotate(-160deg);
   width: 200;
   height: 200;
   transform: translate(-50%, -50%);
  }
  #moon {
+  filter: hue-rotate(90deg);
   width: 80;
   height: 60;
   transform: translate(-50%, -50%);
  }
  #mars {
+  filter: hue-rotate(90deg);
     width: 200;
     height: 200;
     transform: translate(-50%, -50%);
  }
  #sun {
+  filter: hue-rotate(-90deg);
    width: 200;
    height: 200;
    transform: translate(-50%, -50%);
