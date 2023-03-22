@@ -57,7 +57,14 @@ function time () {
       let forceY;
       const radius = 10;
       let dist = Math.sqrt(distX * distX + distY * distY);
-      if (dist < 2*radius) {
+
+      if (planet.color === 'r' && otherPlanet.color === 'g') {
+        forceX = distX / dist * c * otherPlanet.q * planet.q ;
+        forceY = distY / dist * c * otherPlanet.q * planet.q ;
+
+        otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
+        otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
+      } else if (dist < 2*radius) {
         otherPlanet.Vx = 0;
         otherPlanet.Vy = 0; 
         //otherPlanet.x += distX / (radius-dist);
@@ -65,6 +72,8 @@ function time () {
        //otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
        //otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
         
+
+      
 
       } else if ( planet.color !== otherPlanet.color) {
         forceX = -distX / dist * c * otherPlanet.q * planet.q ;
