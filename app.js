@@ -5,7 +5,7 @@ let planets = [];
 let x = 0;
 
 
-while (x < 20) {
+while (x < 23) {
   let id = `randomPlanet-${x}`;
   let randomIndex = Math.floor(Math.random() * 3);
   let colors = ["b","r","g"];
@@ -57,14 +57,16 @@ function time () {
       let forceY;
       const radius = 10;
       let dist = Math.sqrt(distX * distX + distY * distY);
-      if (dist < radius) {
+      if (dist < 2*radius) {
         otherPlanet.Vx = 0;
         otherPlanet.Vy = 0; 
-        otherPlanet.x += distX/(10-dist);
-        otherPlanet.y += distY/(10-dist);
+        //otherPlanet.x += distX / (radius-dist);
+       // otherPlanet.y += distY / (radius-dist);
+       //otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
+       //otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
         
 
-      } else if ( planet.color === planet.color) {
+      } else if ( planet.color !== otherPlanet.color) {
         forceX = -distX / dist * c * otherPlanet.q * planet.q ;
         forceY = -distY / dist * c * otherPlanet.q * planet.q ;
 
