@@ -4,7 +4,8 @@ const c = 0.01;
 let planets = [];
 let x = 0;
 
-while (x<10) {
+
+while (x < 20) {
   let id = `randomPlanet-${x}`;
   let randomIndex = Math.floor(Math.random() * 3);
   let colors = ["b","r","g"];
@@ -54,17 +55,29 @@ function time () {
       let distY = otherPlanet.y - planet.y;
       let forceX;
       let forceY;
-
+      const radius = 10;
       let dist = Math.sqrt(distX * distX + distY * distY);
-      if ( planet.color === planet.color) {
+      if (dist < radius) {
+        otherPlanet.Vx = 0;
+        otherPlanet.Vy = 0; 
+        otherPlanet.x += distX/(10-dist);
+        otherPlanet.y += distY/(10-dist);
+        
+
+      } else if ( planet.color === planet.color) {
         forceX = -distX / dist * c * otherPlanet.q * planet.q ;
         forceY = -distY / dist * c * otherPlanet.q * planet.q ;
+
+        otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
+        otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
       } else {
         forceX = distX / dist * c * otherPlanet.q * planet.q ;
         forceY = distY / dist * c * otherPlanet.q * planet.q ;
+
+        otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
+        otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
       }
-      otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
-      otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
+     
       
       // make them fly (coordinates)
       otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
