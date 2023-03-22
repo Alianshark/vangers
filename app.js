@@ -1,5 +1,6 @@
 let mars = {
-  q: -10,
+  color: "b",
+  q: 10,
   x: 100,
   y: 100,
   Vx: 0,
@@ -9,17 +10,19 @@ let mars = {
 }
 
 let sun = {
+  color: "r",
   q: 10,
   x: 600,
   y: 300,
   Vx: 0,
   Vy: 0,
-  Ma: 10000,
+  Ma: 100,
   star: document.querySelector('#sun'),
 }
 
 let earth = {
-  q: 1,
+  color: "r",
+  q: 10,
   x: 1000, //earth start position x
   y: 100, //start position y
   Vx: 0, // Speed 
@@ -27,8 +30,9 @@ let earth = {
   Ma: 100, //Mass
   star: document.querySelector('#earth'),
 }
-let moon = {
-  q: -10,
+let moon = { 
+  color: "g",
+  q: 10,
   x: 100,
   y: 600,
   Vx: 0, //speed
@@ -38,6 +42,7 @@ let moon = {
 }
 const G = 0.01;
 const k = 10000;
+const c = 0.01;
 let planets = [moon,earth,mars,sun];
 
 //let distX = earth.x-moon.x;
@@ -60,9 +65,17 @@ function time () {
       }
       let distX = otherPlanet.x - planet.x;
       let distY = otherPlanet.y - planet.y;
+      let forceX;
+      let forceY;
       let dist = Math.sqrt(distX * distX + distY * distY);
-      let forceX = distX * k * otherPlanet.q * planet.q / (dist * dist * dist);
-      let forceY = distY * k * otherPlanet.q * planet.q / (dist * dist * dist);
+      if ( planet.color === planet.color) {
+        forceX = -distX / dist * c * otherPlanet.q * planet.q ;
+        forceY = -distY / dist * c * otherPlanet.q * planet.q ;
+      } else {
+        forceX = distX / dist * c * otherPlanet.q * planet.q ;
+        forceY = distY / dist * c * otherPlanet.q * planet.q ;
+      }
+      
 
 
       console.log('dist: ',dist);
@@ -80,4 +93,4 @@ function time () {
       otherPlanet.star.style.left = otherPlanet.x + 'px';
       }
   }
-}
+} 
