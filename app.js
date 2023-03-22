@@ -1,49 +1,7 @@
-let mars = {
-  color: "b",
-  q: 10,
-  x: 100,
-  y: 100,
-  Vx: 0,
-  Vy: 0,
-  Ma: 100,
-  id: 'mars',
-}
-
-let sun = {
-  color: "r",
-  q: 10,
-  x: 600,
-  y: 300,
-  Vx: 0,
-  Vy: 0,
-  Ma: 100,
-  id: 'sun',
-}
-
-let earth = {
-  color: "r",
-  q: 10,
-  x: 1000, //earth start position x
-  y: 100, //start position y
-  Vx: 0, // Speed 
-  Vy: 0, // Speed
-  Ma: 100, //Mass
-  id: 'earth',
-}
-let moon = { 
-  color: "g",
-  q: 10,
-  x: 100,
-  y: 600,
-  Vx: 0, //speed
-  Vy: 0, //speed
-  Ma: 100, //Mass
-  id: 'moon',
-}
 const G = 0.01;
 const k = 10000;
 const c = 0.01;
-let planets = [moon,earth,mars,sun];
+let planets = [];
 let x = 0;
 
 while (x<10) {
@@ -74,16 +32,10 @@ while (x<10) {
   if (planet.color === 'g') {
     document.querySelector('#' + planet.id).style.background = 'green';
   }
-  console.log(planet);
   planets.push(planet);
   x += 1;
 }
-console.log(planets);
-//let distX = earth.x-moon.x;
-//let distY = earth.y-moon.y;
-document.querySelector('#' + mars.id).style.position = 'absolute';
-document.querySelector('#' + moon.id).style.position = 'absolute';
-document.querySelector('#' + earth.id).style.position = 'absolute';
+
 document.querySelector('#' + sun.id).style.position = 'absolute';
 
 
@@ -111,12 +63,6 @@ function time () {
         forceX = distX / dist * c * otherPlanet.q * planet.q ;
         forceY = distY / dist * c * otherPlanet.q * planet.q ;
       }
-      
-
-
-     // console.log('dist: ',dist);
-   //   console.log('Other Planet: ',otherPlanet);
-      // calculate the speed of planet (for each personal)
       otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
       otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
       
