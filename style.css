@@ -4,6 +4,7 @@ html, body {
   height: 100%;
 }
 div {
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 20px;
   height: 20px;

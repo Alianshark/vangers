@@ -21,7 +21,7 @@ while (x < 23) {
     id: id,
   };
   console.log(randomColor);
-  console.log(randomIndex);
+  console.log(randomIndex); 
   document.body.innerHTML += `<div id="${id}"> </div>`;
   document.querySelector('#' + planet.id).style.position = 'absolute';
   if (planet.color === 'r') {
@@ -41,12 +41,12 @@ document.querySelector('#' + sun.id).style.position = 'absolute';
 
 
 
-setInterval(time, 1000/60);
+setInterval(time, 1000/10);
 
 function time () {
+  const radius = 10;
   console.log('Time: ',time);
   for (let planet of planets) {
-   // console.log('Planet',planet);
     for(let otherPlanet of planets) {
       if(otherPlanet==planet){
         continue;
@@ -55,7 +55,7 @@ function time () {
       let distY = otherPlanet.y - planet.y;
       let forceX;
       let forceY;
-      const radius = 10;
+      
       let dist = Math.sqrt(distX * distX + distY * distY);
 
       if (planet.color === 'r' && otherPlanet.color === 'g') {
@@ -68,12 +68,9 @@ function time () {
         otherPlanet.Vx = 0;
         otherPlanet.Vy = 0; 
         //otherPlanet.x += distX / (radius-dist);
-       // otherPlanet.y += distY / (radius-dist);
-       //otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
-       //otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
-        
-
-      
+      // otherPlanet.y += distY / (radius-dist);
+      //otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
+      //otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
 
       } else if ( planet.color !== otherPlanet.color) {
         forceX = -distX / dist * c * otherPlanet.q * planet.q ;
@@ -88,7 +85,19 @@ function time () {
         otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
         otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
       }
-     
+      if (otherPlanet.x < radius ) {
+        otherPlanet.Vx = otherPlanet.Vx * (-1);
+      }
+      if (otherPlanet.x > window.innerWidth - radius) {
+        otherPlanet.Vx = otherPlanet.Vx * (-1);
+      }
+      if (otherPlanet.y < radius) {
+        otherPlanet.Vy = otherPlanet.Vy * (-1);
+      }
+      if (otherPlanet.y > window.innerHeight - radius) {
+        otherPlanet.Vy = otherPlanet.Vy * (-1);
+      }
+      
       
       // make them fly (coordinates)
       otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
@@ -99,5 +108,6 @@ function time () {
       document.querySelector('#' + otherPlanet.id).style.left = otherPlanet.x + 'px';
       
       }
+    
   }
 } 
