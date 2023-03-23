@@ -17,8 +17,8 @@ function createPlanets() {
     let planet = {
       color: randomColor,
       q: 10,
-      x: Math.random() * 1000,
-      y: Math.random() * 1000,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
       Vx: 0, //speed
       Vy: 0, //speed
       Ma: 100, //Mass
@@ -107,14 +107,14 @@ function colorForce (planet,otherPlanet,dist) {
 
 function antiCollapse (planet,otherPlanet,radius,dist) {
   if (dist < 10*radius) {
-    const k = 0.9;
+    const k = 0.15;
     let distX = otherPlanet.x - planet.x;
     let distY = otherPlanet.y - planet.y;
     let forceX = k / dist;
     let forceY = k / dist;
     otherPlanet.x += forceX * distX;
     otherPlanet.y += forceY * distY;
-    
+  
     return;
   }
 }
