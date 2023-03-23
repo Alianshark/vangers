@@ -4,40 +4,42 @@ const c = 0.01;
 let planets = [];
 let x = 0;
 
+createPlanets();
 
-while (x < 100) {
-  let id = `randomPlanet-${x}`;
-  let randomIndex = Math.floor(Math.random() * 3);
-  let colors = ["b","r","g"];
-  let randomColor = colors[randomIndex]
-  let planet = {
-    color: randomColor,
-    q: 10,
-    x: Math.random() * 1000,
-    y: Math.random() * 1000,
-    Vx: 0, //speed
-    Vy: 0, //speed
-    Ma: 100, //Mass
-    id: id,
-  };
-  console.log(randomColor);
-  console.log(randomIndex); 
-  document.body.innerHTML += `<div id="${id}"> </div>`;
-  document.querySelector('#' + planet.id).style.position = 'absolute';
-  if (planet.color === 'r') {
-    document.querySelector('#' + planet.id).style.background = 'red';
+
+function createPlanets() {
+  while (x < 100) {
+    let id = `randomPlanet-${x}`;
+    let randomIndex = Math.floor(Math.random() * 3);
+    let colors = ["b","r","g"];
+    let randomColor = colors[randomIndex]
+    let planet = {
+      color: randomColor,
+      q: 10,
+      x: Math.random() * 1000,
+      y: Math.random() * 1000,
+      Vx: 0, //speed
+      Vy: 0, //speed
+      Ma: 100, //Mass
+      id: id,
+    };
+    console.log(randomColor);
+    console.log(randomIndex); 
+    document.body.innerHTML += `<div id="${id}"> </div>`;
+    document.querySelector('#' + planet.id).style.position = 'absolute';
+    if (planet.color === 'r') {
+      document.querySelector('#' + planet.id).style.background = 'red';
+    }
+    if (planet.color === 'b') {
+      document.querySelector('#' + planet.id).style.background = 'blue';
+    }
+    if (planet.color === 'g') {
+      document.querySelector('#' + planet.id).style.background = 'green';
+    }
+    planets.push(planet);
+    x += 1;
   }
-  if (planet.color === 'b') {
-    document.querySelector('#' + planet.id).style.background = 'blue';
-  }
-  if (planet.color === 'g') {
-    document.querySelector('#' + planet.id).style.background = 'green';
-  }
-  planets.push(planet);
-  x += 1;
 }
-
-document.querySelector('#' + sun.id).style.position = 'absolute';
 
 function forceAction (dist,planet,otherPlanet,znak) {
   let distX = otherPlanet.x - planet.x;
@@ -48,13 +50,13 @@ function forceAction (dist,planet,otherPlanet,znak) {
   otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
   otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
 }
+
 function getDist (planet, otherPlanet) {
   let distX = otherPlanet.x - planet.x;
   let distY = otherPlanet.y - planet.y;
   let dist = Math.sqrt(distX * distX + distY * distY);
   console.log(dist);
-  return dist;
-  
+  return dist;  
 }
 
 setInterval(time, 1000/60);
