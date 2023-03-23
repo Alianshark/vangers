@@ -5,7 +5,7 @@ let planets = [];
 let x = 0;
 
 
-while (x < 23) {
+while (x < 100) {
   let id = `randomPlanet-${x}`;
   let randomIndex = Math.floor(Math.random() * 3);
   let colors = ["b","r","g"];
@@ -41,7 +41,7 @@ document.querySelector('#' + sun.id).style.position = 'absolute';
 
 
 
-setInterval(time, 1000/10);
+setInterval(time, 1000/60);
 
 function time () {
   const radius = 10;
@@ -57,22 +57,19 @@ function time () {
       let forceY;
       
       let dist = Math.sqrt(distX * distX + distY * distY);
-
-      if (planet.color === 'r' && otherPlanet.color === 'g') {
+      if (dist < 2*radius) {
+        otherPlanet.Vx = 0;
+        otherPlanet.Vy = 0;
+        continue;
+      } 
+      if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
         forceX = distX / dist * c * otherPlanet.q * planet.q ;
         forceY = distY / dist * c * otherPlanet.q * planet.q ;
 
         otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
         otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
-      } else if (dist < 2*radius) {
-        otherPlanet.Vx = 0;
-        otherPlanet.Vy = 0; 
-        //otherPlanet.x += distX / (radius-dist);
-      // otherPlanet.y += distY / (radius-dist);
-      //otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
-      //otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
-
-      } else if ( planet.color !== otherPlanet.color) {
+      }
+      if ( planet.color !== otherPlanet.color) {
         forceX = -distX / dist * c * otherPlanet.q * planet.q ;
         forceY = -distY / dist * c * otherPlanet.q * planet.q ;
 
