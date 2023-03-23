@@ -76,22 +76,25 @@ function tolkniPlanety (planet,otherPlanet) {
   let dist = getDist(planet,otherPlanet);
   otragenie(otherPlanet,radius);
   antiCollapse(otherPlanet,radius,dist);
-   
-  if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
-    forceAction(dist,planet,otherPlanet, 1);
-  }
-  if ( planet.color !== otherPlanet.color) {
-    forceAction(dist,planet,otherPlanet, -1);
-  } else {
-    forceAction(dist,planet,otherPlanet, 1);
-  }    
+  colorForce(planet,otherPlanet,dist);
   // make them fly (coordinates)
-  otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
   otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
+  otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
   // make them visualy/realy fly (move imgs)
   document.querySelector('#' + otherPlanet.id).style.top = otherPlanet.y + 'px';
   document.querySelector('#' + otherPlanet.id).style.left = otherPlanet.x + 'px';
       
+}
+function colorForce (planet,otherPlanet,dist) {
+  if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
+    forceAction(dist,planet,otherPlanet, 1);
+  }
+    if ( planet.color !== otherPlanet.color) {
+      forceAction(dist,planet,otherPlanet, -1);
+    } else {
+      forceAction(dist,planet,otherPlanet, 1);
+    }    
+
 }
 
 function antiCollapse (otherPlanet,radius,dist) {
