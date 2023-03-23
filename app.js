@@ -77,7 +77,10 @@ function tolkniPlanety (planet,otherPlanet) {
   let dist = getDist(planet,otherPlanet);
   otragenie(otherPlanet,radius);
   //antiCollapse(planet,otherPlanet,radius,dist);
-  colorForce(planet,otherPlanet,dist);
+  if (dist < 100) {
+    colorForce(planet,otherPlanet,dist);
+  }
+  
   moveCoordinate(otherPlanet);
   moveVisually(otherPlanet);      
 }
@@ -100,18 +103,23 @@ function colorForce (planet,otherPlanet,dist) {
       forceAction(dist, planet,otherPlanet,zminna);
     }
   }
-  if (dist < 80) {
-    return;
-  }
   //rule("r", "r", -0.1);
   //rule("r", "g", -0.01);
   //rule("g", "r", 0.01);
 
-  rule('r','r', 0.1);
-  rule('b','r', 0.15); 
-  rule('g','g', -0.7);  
-  rule('g','r', -0.2);
-  rule('r','g', -0.1);
+  //rule('b','r', 0.15); 
+  //rule('g','g', -0.7);  
+  //rule('g','r', -0.2);
+  //rule('r','g', -0.1);
+  //rule('r','r', 0.1);
+
+  rule('g', 'g', -0.32);
+  rule('g', 'r', -0.17);
+  rule('g', 'b', 0.34);
+  rule('r', 'r', -0.1);
+  rule('r', 'g', -0.34);
+  rule('b', 'b', 0.15);
+  rule('b', 'g', -0.2);
   
 }
 
