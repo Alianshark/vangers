@@ -56,7 +56,6 @@ function getDist (planet, otherPlanet) {
   let distX = otherPlanet.x - planet.x;
   let distY = otherPlanet.y - planet.y;
   let dist = Math.sqrt(distX * distX + distY * distY);
-  console.log(dist);
   return dist;  
 }
 
@@ -78,7 +77,7 @@ function tolkniPlanety (planet,otherPlanet) {
   let dist = getDist(planet,otherPlanet);
   otragenie(otherPlanet,radius);
   antiCollapse(otherPlanet,radius,dist);
-  colorForce(planet,otherPlanet,dist);
+  //colorForce(planet,otherPlanet,dist);
   moveCoordinate(otherPlanet);
   moveVisually(otherPlanet);      
 }
@@ -107,11 +106,13 @@ function colorForce (planet,otherPlanet,dist) {
 }
 
 function antiCollapse (otherPlanet,radius,dist) {
-  if (dist < 2*radius) {
-    let forceX = -otherPlanet.Vx;
-    let forceY = -otherPlanet.Vy;
-    otherPlanet.Vx += forceX * 1.0;
-    otherPlanet.Vy += forceY * 1.0;
+  if (dist < 1*radius) {
+    console.log('test');
+    const k = 2;
+    let forceX = k / dist;
+    let forceY = k / dist;
+    otherPlanet.Vx += forceX ;
+    otherPlanet.Vy += forceY;
     return;
   }
 }
