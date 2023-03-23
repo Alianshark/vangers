@@ -73,32 +73,33 @@ function time () {
 
 function tolkniPlanety (planet,otherPlanet) {
   const radius = 10;
-  otragenie(otherPlanet,radius);
   let dist = getDist(planet,otherPlanet);
-      if (dist < 2*radius) {
-        otherPlanet.Vx = 0;
-        otherPlanet.Vy = 0;
-        return;
-      } 
-      if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
-        forceAction(dist,planet,otherPlanet, 1);
-      }
-      if ( planet.color !== otherPlanet.color) {
-        forceAction(dist,planet,otherPlanet, -1);
-      } else {
-        forceAction(dist,planet,otherPlanet, 1);
-      }
+  otragenie(otherPlanet,radius);
+  antiCollapse(otherPlanet,radius,dist);
+   
+  if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
+    forceAction(dist,planet,otherPlanet, 1);
+  }
+  if ( planet.color !== otherPlanet.color) {
+    forceAction(dist,planet,otherPlanet, -1);
+  } else {
+    forceAction(dist,planet,otherPlanet, 1);
+  }    
+  // make them fly (coordinates)
+  otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
+  otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
+  // make them visualy/realy fly (move imgs)
+  document.querySelector('#' + otherPlanet.id).style.top = otherPlanet.y + 'px';
+  document.querySelector('#' + otherPlanet.id).style.left = otherPlanet.x + 'px';
       
-      
-      
-      // make them fly (coordinates)
-      otherPlanet.x = otherPlanet.x + otherPlanet.Vx;
-      otherPlanet.y = otherPlanet.y + otherPlanet.Vy;
+}
 
-      // make them visualy/realy fly (move imgs)
-      document.querySelector('#' + otherPlanet.id).style.top = otherPlanet.y + 'px';
-      document.querySelector('#' + otherPlanet.id).style.left = otherPlanet.x + 'px';
-      
+function antiCollapse (otherPlanet,radius,dist) {
+  if (dist < 2*radius) {
+    otherPlanet.Vx = 0;
+    otherPlanet.Vy = 0;
+    return;
+  }
 }
 
 function otragenie (otherPlanet, radius) {
