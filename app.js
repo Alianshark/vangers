@@ -73,6 +73,7 @@ function time () {
 
 function tolkniPlanety (planet,otherPlanet) {
   const radius = 10;
+  otragenie(otherPlanet,radius);
   let dist = getDist(planet,otherPlanet);
       if (dist < 2*radius) {
         otherPlanet.Vx = 0;
@@ -87,18 +88,7 @@ function tolkniPlanety (planet,otherPlanet) {
       } else {
         forceAction(dist,planet,otherPlanet, 1);
       }
-      if (otherPlanet.x < radius ) {
-        otherPlanet.Vx = otherPlanet.Vx * (-1);
-      }
-      if (otherPlanet.x > window.innerWidth - radius) {
-        otherPlanet.Vx = otherPlanet.Vx * (-1);
-      }
-      if (otherPlanet.y < radius) {
-        otherPlanet.Vy = otherPlanet.Vy * (-1);
-      }
-      if (otherPlanet.y > window.innerHeight - radius) {
-        otherPlanet.Vy = otherPlanet.Vy * (-1);
-      }
+      
       
       
       // make them fly (coordinates)
@@ -109,4 +99,19 @@ function tolkniPlanety (planet,otherPlanet) {
       document.querySelector('#' + otherPlanet.id).style.top = otherPlanet.y + 'px';
       document.querySelector('#' + otherPlanet.id).style.left = otherPlanet.x + 'px';
       
+}
+
+function otragenie (otherPlanet, radius) {
+  if (otherPlanet.x < radius ) {
+    otherPlanet.Vx = otherPlanet.Vx * (-1);
+  }
+  if (otherPlanet.x > window.innerWidth - radius) {
+    otherPlanet.Vx = otherPlanet.Vx * (-1);
+  }
+  if (otherPlanet.y < radius) {
+    otherPlanet.Vy = otherPlanet.Vy * (-1);
+  }
+  if (otherPlanet.y > window.innerHeight - radius) {
+    otherPlanet.Vy = otherPlanet.Vy * (-1);
+  }
 }
