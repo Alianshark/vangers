@@ -17,8 +17,8 @@ function createPlanets() {
     let planet = {
       color: randomColor,
       q: 10,
-      x: Math.random() * 200,//window.innerWidth,
-      y: Math.random() * 200,//window.innerHeight,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
       Vx: 0, //speed
       Vy: 0, //speed
       Ma: 100, //Mass
@@ -95,27 +95,24 @@ function moveCoordinate (otherPlanet) {
 }
 
 function colorForce (planet,otherPlanet,dist) {
+  function rule (colorX, colorY, zminna) {
+    if (planet.color === colorX && otherPlanet.color === colorY) {
+      forceAction(dist, planet,otherPlanet,zminna);
+    }
+  }
   if (dist < 80) {
     return;
   }
-  if (planet.color === 'r' && otherPlanet.color === 'g') {
-    forceAction(dist, planet,otherPlanet,-0.1);
-  }
-  if (planet.color === 'g' && otherPlanet.color === 'r') {
-    forceAction(dist,planet,otherPlanet, -0.01);
-  }
-  if (planet.color === 'r' && otherPlanet.color === 'r') {
-    forceAction(dist,planet,otherPlanet, 0.01)
-  }
-  /*
-  if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
-    forceAction(dist,planet,otherPlanet, 1);
-  }
-  if ( planet.color !== otherPlanet.color) {
-    forceAction(dist,planet,otherPlanet, -1);
-  } else {
-    forceAction(dist,planet,otherPlanet, 1);
-  } */     
+  //rule("r", "r", -0.1);
+  //rule("r", "g", -0.01);
+  //rule("g", "r", 0.01);
+
+  rule('r','r', 0.1);
+  rule('b','r', 0.15); 
+  rule('g','g', -0.7);  
+  rule('g','r', -0.2);
+  rule('r','g', -0.1);
+  
 }
 
 function antiCollapse (planet,otherPlanet,radius,dist) {
