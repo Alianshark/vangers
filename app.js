@@ -5,6 +5,7 @@ let planets = [];
 let x = 0;
 
 createPlanets();
+setInterval(time, 1000/60);
 
 
 function createPlanets() {
@@ -59,7 +60,6 @@ function getDist (planet, otherPlanet) {
   return dist;  
 }
 
-setInterval(time, 1000/60);
 
 function time () {
   for (let planet of planets) {
