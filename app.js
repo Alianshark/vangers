@@ -103,16 +103,17 @@ function colorForce (planet,otherPlanet,dist) {
       forceAction(dist, planet,otherPlanet,zminna);
     }
   }
+
   //rule("r", "r", -0.1);
   //rule("r", "g", -0.01);
   //rule("g", "r", 0.01);
 
+  //rule('r','r', 0.1);
   //rule('b','r', 0.15); 
   //rule('g','g', -0.7);  
   //rule('g','r', -0.2);
   //rule('r','g', -0.1);
-  //rule('r','r', 0.1);
-
+  
   rule('g', 'g', -0.32);
   rule('g', 'r', -0.17);
   rule('g', 'b', 0.34);
