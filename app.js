@@ -60,20 +60,24 @@ function getDist (planet, otherPlanet) {
 setInterval(time, 1000/60);
 
 function time () {
-  const radius = 10;
-  console.log('Time: ',time);
   for (let planet of planets) {
     for(let otherPlanet of planets) {
-      if(otherPlanet==planet){
-        continue;
-      }
-      
- 
-      let dist = getDist(planet,otherPlanet);
+      if (otherPlanet == planet) {
+        // No force between same planets 
+      } else {
+        tolkniPlanety(planet,otherPlanet);
+      } 
+    }
+  }
+} 
+
+function tolkniPlanety (planet,otherPlanet) {
+  const radius = 10;
+  let dist = getDist(planet,otherPlanet);
       if (dist < 2*radius) {
         otherPlanet.Vx = 0;
         otherPlanet.Vy = 0;
-        continue;
+        return;
       } 
       if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
         forceAction(dist,planet,otherPlanet, 1);
@@ -105,7 +109,4 @@ function time () {
       document.querySelector('#' + otherPlanet.id).style.top = otherPlanet.y + 'px';
       document.querySelector('#' + otherPlanet.id).style.left = otherPlanet.x + 'px';
       
-      }
-    
-  }
-} 
+}
