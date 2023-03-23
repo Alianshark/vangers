@@ -1,6 +1,6 @@
 const G = 0.01;
 const k = 10000;
-const c = 0.01;
+const c = 1;
 let planets = [];
 let x = 0;
 
@@ -45,11 +45,11 @@ function createPlanets() {
 function forceAction (dist,planet,otherPlanet,znak) {
   let distX = otherPlanet.x - planet.x;
   let distY = otherPlanet.y - planet.y;
-  let forceX =  znak * distX / dist * c * otherPlanet.q * planet.q ;
-  let forceY = znak * distY / dist * c * otherPlanet.q * planet.q ;
+  let forceX =  znak * distX / dist * c ;
+  let forceY = znak * distY / dist * c ;
 
-  otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
-  otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
+  otherPlanet.Vx = (otherPlanet.Vx + forceX ) * 0.5;
+  otherPlanet.Vy = (otherPlanet.Vy + forceY) * 0.5;
 }
 
 function getDist (planet, otherPlanet) {
@@ -76,8 +76,8 @@ function tolkniPlanety (planet,otherPlanet) {
   const radius = 10;
   let dist = getDist(planet,otherPlanet);
   otragenie(otherPlanet,radius);
-  antiCollapse(planet,otherPlanet,radius,dist);
-  //colorForce(planet,otherPlanet,dist);
+  //antiCollapse(planet,otherPlanet,radius,dist);
+  colorForce(planet,otherPlanet,dist);
   moveCoordinate(otherPlanet);
   moveVisually(otherPlanet);      
 }
@@ -95,6 +95,9 @@ function moveCoordinate (otherPlanet) {
 }
 
 function colorForce (planet,otherPlanet,dist) {
+  if (dist < 80) {
+    return;
+  }
   if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
     forceAction(dist,planet,otherPlanet, 1);
   }
