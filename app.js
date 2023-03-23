@@ -17,8 +17,8 @@ function createPlanets() {
     let planet = {
       color: randomColor,
       q: 10,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
+      x: Math.random() * 200,//window.innerWidth,
+      y: Math.random() * 200,//window.innerHeight,
       Vx: 0, //speed
       Vy: 0, //speed
       Ma: 100, //Mass
@@ -98,6 +98,16 @@ function colorForce (planet,otherPlanet,dist) {
   if (dist < 80) {
     return;
   }
+  if (planet.color === 'r' && otherPlanet.color === 'g') {
+    forceAction(dist, planet,otherPlanet,-0.1);
+  }
+  if (planet.color === 'g' && otherPlanet.color === 'r') {
+    forceAction(dist,planet,otherPlanet, -0.01);
+  }
+  if (planet.color === 'r' && otherPlanet.color === 'r') {
+    forceAction(dist,planet,otherPlanet, 0.01)
+  }
+  /*
   if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
     forceAction(dist,planet,otherPlanet, 1);
   }
@@ -105,12 +115,12 @@ function colorForce (planet,otherPlanet,dist) {
     forceAction(dist,planet,otherPlanet, -1);
   } else {
     forceAction(dist,planet,otherPlanet, 1);
-  }    
+  } */     
 }
 
 function antiCollapse (planet,otherPlanet,radius,dist) {
   if (dist < 10*radius) {
-    const k = 0.15;
+    const k = 0.1;
     let distX = otherPlanet.x - planet.x;
     let distY = otherPlanet.y - planet.y;
     let forceX = k / dist;
