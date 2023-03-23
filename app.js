@@ -78,11 +78,13 @@ function tolkniPlanety (planet,otherPlanet) {
   antiCollapse(otherPlanet,radius,dist);
   colorForce(planet,otherPlanet,dist);
   moveCoordinate(otherPlanet);
-    
-  // make them visualy/realy fly (move imgs)
+  moveVisually(otherPlanet);      
+}
+
+// make them visualy/realy fly (move imgs)
+function moveVisually (otherPlanet) {
   document.querySelector('#' + otherPlanet.id).style.top = otherPlanet.y + 'px';
   document.querySelector('#' + otherPlanet.id).style.left = otherPlanet.x + 'px';
-      
 }
 
 // make them fly (coordinates)
