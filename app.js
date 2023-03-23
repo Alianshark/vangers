@@ -39,15 +39,23 @@ while (x < 100) {
 
 document.querySelector('#' + sun.id).style.position = 'absolute';
 
-function forceAction (dist,distX,distY,forceX,forceY,planet,otherPlanet,znak) {
-  forceX =  znak * distX / dist * c * otherPlanet.q * planet.q ;
-  forceY = znak * distY / dist * c * otherPlanet.q * planet.q ;
+function forceAction (dist,planet,otherPlanet,znak) {
+  let distX = otherPlanet.x - planet.x;
+  let distY = otherPlanet.y - planet.y;
+  let forceX =  znak * distX / dist * c * otherPlanet.q * planet.q ;
+  let forceY = znak * distY / dist * c * otherPlanet.q * planet.q ;
 
   otherPlanet.Vx = otherPlanet.Vx + forceX / otherPlanet.Ma;
   otherPlanet.Vy = otherPlanet.Vy + forceY / otherPlanet.Ma;
 }
-
-
+function getDist (planet, otherPlanet) {
+  let distX = otherPlanet.x - planet.x;
+  let distY = otherPlanet.y - planet.y;
+  let dist = Math.sqrt(distX * distX + distY * distY);
+  console.log(dist);
+  return dist;
+  
+}
 
 setInterval(time, 1000/60);
 
@@ -59,23 +67,21 @@ function time () {
       if(otherPlanet==planet){
         continue;
       }
-      let distX = otherPlanet.x - planet.x;
-      let distY = otherPlanet.y - planet.y;
-      let forceX;
-      let forceY; 
-      let dist = Math.sqrt(distX * distX + distY * distY);
+      
+ 
+      let dist = getDist(planet,otherPlanet);
       if (dist < 2*radius) {
         otherPlanet.Vx = 0;
         otherPlanet.Vy = 0;
         continue;
       } 
       if (planet.color === 'r' && otherPlanet.color !== 'g' && otherPlanet !== 'b') {
-        forceAction(dist,distX,distY,forceX,forceY,planet,otherPlanet, 1);
+        forceAction(dist,planet,otherPlanet, 1);
       }
       if ( planet.color !== otherPlanet.color) {
-        forceAction(dist,distX,distY,forceX,forceY,planet,otherPlanet, -1);
+        forceAction(dist,planet,otherPlanet, -1);
       } else {
-        forceAction(dist,distX,distY,forceX,forceY,planet,otherPlanet, 1);
+        forceAction(dist,planet,otherPlanet, 1);
       }
       if (otherPlanet.x < radius ) {
         otherPlanet.Vx = otherPlanet.Vx * (-1);
