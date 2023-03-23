@@ -108,8 +108,10 @@ function colorForce (planet,otherPlanet,dist) {
 
 function antiCollapse (otherPlanet,radius,dist) {
   if (dist < 2*radius) {
-    otherPlanet.Vx = 0;
-    otherPlanet.Vy = 0;
+    let forceX = -otherPlanet.Vx;
+    let forceY = -otherPlanet.Vy;
+    otherPlanet.Vx += forceX * 1.0;
+    otherPlanet.Vy += forceY * 1.0;
     return;
   }
 }
